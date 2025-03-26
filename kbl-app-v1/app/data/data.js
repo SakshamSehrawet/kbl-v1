@@ -10,9 +10,9 @@ export const teamOwners = [
   "DoOMTaNaDoOm (Nikhil)",
   "AGTG99 (Aditya)",
   "TokyoIndians (Akash)",
-  "Chinmay Cobras (Chinmay)",
   "Tan Tana Tan tantan Tara (Tanishka)",
-  "Mayank Legends (Mayank)"
+  "Chinmay night owls (Chinmay)",
+  "Naam hai Bullllaaaaa (Mayank)"
 ]
 
 export const fixtures = [
