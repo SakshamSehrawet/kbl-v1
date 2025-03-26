@@ -75,7 +75,11 @@ export default function TeamPerformance() {
   }, [selectedTeam])
 
   if (loading) {
-    return <div>Loading team performance data...</div>
+    return (
+      <div className="flex justify-center items-center h-20">
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-500"></div>
+      </div>
+    )
   }
 
   // Prepare data for the points chart
@@ -191,9 +195,9 @@ export default function TeamPerformance() {
       <Tabs defaultValue="overview" className="w-full">
         <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="team">Team Details</TabsTrigger>
-          <TabsTrigger value="comparison">Comparison</TabsTrigger>
-          <TabsTrigger value="table">Table View</TabsTrigger>
+          <TabsTrigger value="team">Team</TabsTrigger>
+          <TabsTrigger value="comparison">Compare</TabsTrigger>
+          <TabsTrigger value="table">Table</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="mt-6 space-y-6">
@@ -205,7 +209,7 @@ export default function TeamPerformance() {
                   <BarChart data={pointsChartData} layout="vertical">
                     <CartesianGrid horizontal={true} vertical={false} />
                     <XAxis type="number" />
-                    <YAxis dataKey="name" type="category" width={150} />
+                    <YAxis dataKey="name" type="category" width={window.innerWidth < 768 ? 100 : 150}/>
                     <Tooltip
                       formatter={(value) => [`${value} points`, "Total"]}
                       contentStyle={{
@@ -297,9 +301,25 @@ export default function TeamPerformance() {
 
         <TabsContent value="team" className="mt-6">
           <Card>
-            <CardHeader>
-              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {teamData.map((team, index) => (
+          <CardHeader>
+              {/* Mobile: Dropdown Selector */}
+              <div className="md:hidden">
+                <select
+                  className="w-full p-2 border rounded-md text-sm"
+                  value={selectedTeam}
+                  onChange={(e) => setSelectedTeam(e.target.value)}
+                >
+                  {teamData.map((team) => (
+                    <option key={team.team} value={team.team}>
+                      {team.team + " (" + team.owner +")"}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Tablet & Desktop: Grid Layout */}
+              <div className="hidden md:grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {teamData.map((team) => (
                   <Card
                     key={team.team}
                     className={`team-card cursor-pointer ${selectedTeam === team.team ? "ring-2 ring-primary" : ""}`}
@@ -324,6 +344,7 @@ export default function TeamPerformance() {
                 ))}
               </div>
             </CardHeader>
+
             <CardContent className="pt-6">
               <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
                 <div className="flex items-center gap-3 mb-4 md:mb-0">
@@ -413,12 +434,18 @@ export default function TeamPerformance() {
           <Card>
             <CardContent className="pt-6">
               <h3 className="text-lg font-semibold mb-4">Team Comparison</h3>
-              <div className="h-[800px]">
+              <div className="h-[500px] w-full overflow-x-auto flex justify-center">
                 <ResponsiveContainer width="100%" height="100%">
-                  <RadarChart outerRadius={300} data={matchWiseChartData}>
+                  <RadarChart
+                    outerRadius={window.innerWidth < 768 ? 120 : 250} // Reduce radius for mobile
+                    data={matchWiseChartData}
+                  >
                     <PolarGrid />
-                    <PolarAngleAxis dataKey="match" />
-                    <PolarRadiusAxis angle={30} domain={[0, 12]} />
+                    <PolarAngleAxis 
+                      dataKey="match" 
+                      tick={{ fontSize: window.innerWidth < 768 ? 10 : 12 }} // Smaller font for mobile
+                    />
+                    <PolarRadiusAxis angle={30} domain={[0, 12]} tick={{ fontSize: 10 }} />
                     {teamData.map((team, index) => (
                       <Radar
                         key={team.team}
@@ -429,7 +456,7 @@ export default function TeamPerformance() {
                         fillOpacity={0.15}
                       />
                     ))}
-                    <Legend />
+                    <Legend wrapperStyle={{ fontSize: window.innerWidth < 768 ? 10 : 12 }} />
                     <Tooltip
                       contentStyle={{
                         backgroundColor: "var(--background)",
@@ -444,6 +471,7 @@ export default function TeamPerformance() {
             </CardContent>
           </Card>
         </TabsContent>
+
 
         <TabsContent value="table" className="mt-4">
           <Card>

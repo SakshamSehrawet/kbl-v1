@@ -27,44 +27,37 @@ export default function Home() {
           <div className="flex flex-1 items-center justify-end space-x-4">
             <nav className="flex items-center space-x-2">
               <ThemeToggle />
-              <Link href="https://github.com/yourusername/ipl-fantasy-dashboard" target="_blank">
+              <Link href="https://github.com/SakshamSehrawet/kbl-v1" target="_blank">
                 <Button variant="ghost" size="icon">
                   <Github className="h-5 w-5" />
                   <span className="sr-only">GitHub</span>
                 </Button>
+                
+              </Link>
+              <Link href="https://github.com/SakshamSehrawet/kbl-v1" target="_blank">
+                <Button variant="ghost" size="icon">
+                  <span className="h-5 w-5" >API</span>
+                  <span className="sr-only">GitHub</span>
+                </Button>
+                
               </Link>
             </nav>
           </div>
         </div>
       </header>
 
-      <div className="py-12 md:py-24">
-        <div className="container px-4 md:px-6">
-          <div className="flex flex-col items-center justify-center space-y-4 text-center">
-            <div className="space-y-2">
-              <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-white">
-                IPL 2025 Dream11 Fantasy League
-              </h1>
-              <p className="mx-auto max-w-[700px] text-white/80 md:text-xl">
-                Track your team's performance, view the leaderboard, and stay updated with match schedules.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <main className="flex-1 py-12" id="dashboard">
-        <div className="container px-4 md:px-6">
+      <main className="flex-1 py-2" id="dashboard">
+        <div className="container px-1 md:px-6">
           <Tabs defaultValue="leaderboard" className="mt-8">
             <TabsList className="grid w-full grid-cols-3 mb-8">
               <TabsTrigger value="leaderboard" className="text-sm sm:text-base">
                 Leaderboard
               </TabsTrigger>
               <TabsTrigger value="performance" className="text-sm sm:text-base">
-                Team Performance
+                Performance
               </TabsTrigger>
               <TabsTrigger value="schedule" className="text-sm sm:text-base">
-                Match Schedule
+                Schedule
               </TabsTrigger>
             </TabsList>
             <TabsContent value="leaderboard" className="mt-6 space-y-8">
@@ -78,7 +71,6 @@ export default function Home() {
                       </CardTitle>
                       <LastUpdatedIndicator />
                     </div>
-                    <CardDescription>Updated leaderboard showing the current standings of all teams.</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <Suspense fallback={<LeaderboardSkeleton />}>
@@ -91,7 +83,7 @@ export default function Home() {
             <TabsContent value="performance" className="mt-6">
               <Card className="team-card">
                 <CardHeader>
-                  <CardTitle>Team Performance</CardTitle>
+                  <CardTitle>Performance</CardTitle>
                   <CardDescription>Detailed performance of each team across all matches.</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -104,7 +96,7 @@ export default function Home() {
             <TabsContent value="schedule" className="mt-6">
               <Card className="team-card">
                 <CardHeader>
-                  <CardTitle>Match Schedule</CardTitle>
+                  <CardTitle>Schedule</CardTitle>
                   <CardDescription>Complete schedule of IPL 2025 matches.</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -120,9 +112,11 @@ export default function Home() {
 
       <footer className="border-t py-6 md:py-0">
         <div className="container flex flex-col items-center justify-between gap-4 md:h-16 md:flex-row">
-          <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} KUCHBHI IPL 2025 DREAM11 LEAGUE. All rights reserved.
-          </p>
+          <Link href="https://dream11.com" target="_blank">
+            <Button variant="ghost" size="icon">
+              <span className="text-sm text-muted-foreground">Dream11 </span><ArrowRight />
+            </Button>
+          </Link>
           <div className="flex items-center gap-4">
             <Button asChild variant="ghost" size="sm">
               <Link href="/about">About</Link>

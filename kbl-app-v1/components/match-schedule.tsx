@@ -55,9 +55,13 @@ useEffect(() => {
 }, [matches]) // Runs when matches are loaded
 
 
-  if (loading) {
-    return <div>Loading match schedule...</div>
-  }
+if (loading) {
+  return (
+    <div className="flex justify-center items-center h-20">
+      <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-500"></div>
+    </div>
+  )
+}
 
   // Get unique venues for filter
   const venues = Array.from(new Set(matches.map((match) => match.venue)))

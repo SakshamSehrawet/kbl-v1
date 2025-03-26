@@ -14,7 +14,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "KUCHBHI IPL 2025 DREAM11 LEAGUE",
   description: "Track your team's performance in the IPL 2025 Dream11 Fantasy League",
-    generator: 'v0.dev'
+    generator: 'saku'
 }
 
 export default function RootLayout({

@@ -53,8 +53,13 @@ export default function LeaderboardTable() {
   }, [])
 
   if (loading) {
-    return <div>Loading leaderboard data...</div>
+    return (
+      <div className="flex justify-center items-center h-20">
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-500"></div>
+      </div>
+    )
   }
+  
 
   const getInitials = (name: string) => {
     return name
