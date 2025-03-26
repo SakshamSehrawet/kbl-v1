@@ -34,7 +34,7 @@ export default function Home() {
                 </Button>
                 
               </Link>
-              <Link href="https://github.com/SakshamSehrawet/kbl-v1" target="_blank">
+              <Link href="https://github.com/SakshamSehrawet/kbl-v1/blob/4ee06a9a6e237bed7c6dd68cd05c338536801055/kbl-app-v1/API_README.md" target="_blank">
                 <Button variant="ghost" size="icon">
                   <span className="h-5 w-5" >API</span>
                   <span className="sr-only">GitHub</span>
